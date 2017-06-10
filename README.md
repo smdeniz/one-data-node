@@ -2,12 +2,16 @@
 
 Multi DB Server client for Node.js
 
+*npm: [OneDataNode][]
+
+[OneDataNode]: https://www.npmjs.com/package/one-data-node
+
 ## Quick Example
 
 ```javascript
 var frm = require("one-data-node");
 
-var dbConfig = {
+var dbConfigMsSql = {
     server: 'localhost', // You can use 'localhost\\instance' to connect to named instance,
     database: "...",
     user: "...",
@@ -19,23 +23,30 @@ var dbConfig = {
     }
 };
 
+var dbConnfigMySql = {
+  host     : 'localhost',
+  user     : 'me',
+  password : 'secret',
+  database : 'my_db'
+};
+
 var multiQManager = new frm.multiQueryManager();
 
 var arrayQuery = [
     {
-        dbConfig: dbConfig,
+        dbConfig: dbConfigMsSql,
         dbType: "mssql",
         isTransaction: true,
         key: "qKey1",
         query: "select * from mytable where val = @val",
         beforeExec: function (previousResults, dataBase) {
 
-            dataBase.addInputValue("val", "INT" , 10);
+            dataBase.addInputValue("val", 10, "INT" );
 
         }
     },
     {
-        dbConfig: dbConfig,
+        dbConfig: dbConfigMsSql,
         dbType: "mssql",
         isTransaction: false,
         key:"qKey2",
@@ -43,6 +54,18 @@ var arrayQuery = [
         beforeExec: function (previousResults,dataBase) {
             var recordset = previousResults.qKey1.result.recordset;
             
+        }
+    },
+    {
+        dbConfig: dbConfigMySql,
+        dbType: "mysql",
+        isTransaction: false,
+        key:"qKey3",
+        query: "select * from mytable where val = :val",
+        beforeExec: function (previousResults, dataBase) {
+
+            dataBase.addInputValue("val", 12 );
+
         }
     }
 ];
