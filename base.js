@@ -7,12 +7,13 @@
 
 module.exports = require("./nodeFramework");
 
+
 //var frm = require("./nodeFramework");
 
 ////var servicen =new frm.servicen();
 
 //var dbConfig = {
-//    server: "ARGE54\\SQLEXPRESS",
+//    server: "localhost",
 //    database: "IsAkis",
 //    user: "sa",
 //    password: "Password1",
@@ -29,12 +30,12 @@ module.exports = require("./nodeFramework");
 //    {
 //        dbConfig: dbConfig,
 //        dbType: "mssql",
-//        isTransaction: true,
+//        isTransaction: false,
 //        key: "qKey1",
-//        query: "select * from TestDB.dbo.Deneme where val = @val",
+//        query: "select * from TestDB.dbo.Deneme",
 //        beforeExec: function (previousResults, dataBase) {
 
-//            dataBase.addInputValue("val", "INT" , 10);
+//            //dataBase.addInputValue("val" , 10, "INT");
 
 //        }
 //    },
@@ -43,9 +44,14 @@ module.exports = require("./nodeFramework");
 //        dbType: "mssql",
 //        isTransaction: false,
 //        key:"qKey2",
-//        query: "insert into TestDB.dbo.Deneme values(10)",
+//        query: "insert into TestDB.dbo.Deneme values(@val)",
 //        beforeExec: function (previousResults,dataBase) {
 //            var recordset = previousResults.qKey1.result.recordset;
+
+//            if (recordset.length > 0)
+//            {
+//                dataBase.addInputValue("val", recordset[0].val, "INT");
+//            }
             
 //        }
 //    }

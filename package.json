@@ -1,0 +1,13 @@
+{
+  "name": "one-data-node",
+  "version": "0.1.7",
+  "description": "OneDataNode",
+  "main": "base.js",
+  "author": {
+    "name": "arge"
+  },
+  "dependencies": {
+    "mssql": "^4.0.1",
+    "mysql": "^2.13.0"
+  }
+}

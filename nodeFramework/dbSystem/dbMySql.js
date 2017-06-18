@@ -146,4 +146,4 @@ prp.close = function (func) {
 
 
 
-module.exports = dbMsSql;
+module.exports = dbMySql;
